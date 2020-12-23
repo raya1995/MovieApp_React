@@ -2,14 +2,20 @@
 import { css, jsx } from "@emotion/core";
 import { useContext } from "react";
 import { MovieContext } from "../../../Context/MovieContext";
+import React, { useState } from 'react';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 const HeroNavSearch = () => {
   const { search, setSearch, handleSearch, activeLink } = useContext(
     MovieContext
   );
+  const [dropdownOpen, setOpen] = useState(false);
+
+  const toggle = () => setOpen(!dropdownOpen);
+
 
   return (
-    <>
+  <React.Fragment>
     <form css={styles} onSubmit={handleSearch}>
       {activeLink !== "Popular" && (
         <input
@@ -18,20 +24,12 @@ const HeroNavSearch = () => {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-       
+        
       )}
-      <div class="btn-group" role="group">
-    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown
-    </button>
-    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      <a class="dropdown-item" href="#">Dropdown link</a>
-      <a class="dropdown-item" href="#">Dropdown link</a>
-    </div>
-  </div>
 
     </form>
-    </>
+    
+    </React.Fragment>
   );
 };
 
@@ -60,3 +58,17 @@ const styles = css`
 `;
 
 export default HeroNavSearch;
+
+
+/*{(<ButtonDropdown isOpen={dropdownOpen} toggle={toggle}>
+      <DropdownToggle caret>
+        Button Dropdown
+      </DropdownToggle>
+      <DropdownMenu>
+        <DropdownItem header>Header</DropdownItem>
+        <DropdownItem disabled>Action</DropdownItem>
+        <DropdownItem>Another Action</DropdownItem>
+        <DropdownItem divider />
+        <DropdownItem>Another Action</DropdownItem>
+      </DropdownMenu>
+    </ButtonDropdown>)}*/
